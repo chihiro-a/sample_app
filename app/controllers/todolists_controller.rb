@@ -6,7 +6,16 @@ class TodolistsController < ApplicationController
   def create
     list = List.new(list_params)
     list.save
-    redirect_to '/top'
+    redirect_to todolist_path(list.id)
+  end
+
+  def index
+    @lists = List.all
+    # @listではなく@listsにする。@listsの中には投稿データが全て入るため
+  end
+
+  def show
+    @list = List.find(params[:id])
   end
 
   private
